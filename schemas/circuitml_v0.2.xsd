@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema targetNamespace="http://www.neuroml.org/schema/neuroml2"
+    xmlns="http://www.neuroml.org/schema/neuroml2"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified">
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--      Main CircuitML element                             -->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <xs:element name="circuitml" type="CircuitMLDocument">
+        <xs:annotation>
+            <xs:documentation>The root CircuitML element.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+
+    <xs:complexType name="CircuitMLDocument">
+        <xs:complexContent>
+            <xs:extension base="NeuroMLDocument">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="include" type="IncludeType"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="lpu" type="Lpu"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Interface">
+        <xs:annotation>
+            <xs:documentation>Interface element which is usually inside an LPU
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="inputs" type="xs:integer" use="optional"/>
+        <xs:attribute name="outputs" type="xs:integer" use="optional"/>
+        <xs:complexContent>
+            <xs:extension base="Standalone"/>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:group name="CellTypes">
+        <xs:annotation>
+            <xs:documentation>
+                Various types of cells which are defined in NeuroML 2 and
+                CircuitML.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:extension base="CellTypes">
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="morrisLecarCell" type="MorrisLecarCell"/>
+            </xs:sequence>
+        </xs:extension>
+    </xs:group>
+
+    <xs:group name="SynapseTypes">
+        <xs:annotation>
+            <xs:documentation>
+                Various types of synapse which are defined in NeuroML 2 and
+                CircuitML.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:extension base="SynapseTypes">
+            <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="morrisLecarSynapse" type="MorrisLecarSynapse"/>
+            </xs:sequence>
+        </xs:extension>
+    </xs:group>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--      Synapse types                                    -->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <xs:complexType name="MorrisLecarSynapse">
+        <xs:complexContent>
+            <xs:extension base="ConductanceBasedSynapse">
+                <xs:attribute name="slope" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="thresh" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="power" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="saturation" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="delay" type="Nml2Quantity_time" use="required"/>
+                <xs:attribute name="factor" type="Nml2Quantity_none" use="required"/>
+                <xs:attribute name="reverse" type="Nml2Quantity_none" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--      Cell element                                     -->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <xs:complexType name="MorrisLecarCell">
+        <xs:complexContent>
+            <xs:extension base="AbstractCell">
+                <xs:attribute name="C" type="Nml2Quantity_capacitance" use="required"/>
+                <xs:attribute name="I" type="Nml2Quantity_current" use="required"/>
+                <xs:attribute name="gL" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="gCa" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="gK" type="Nml2Quantity_conductance" use="required"/>
+                <xs:attribute name="VL" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="VCa" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="VK" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="V1" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="V2" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="V3" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="V4" type="Nml2Quantity_voltage" use="required"/>
+                <xs:attribute name="phi" type="Nml2Quantity_none" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <!--      Modules                                          -->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <xs:complexType name="lpu">
+        <xs:complexContent>
+            <xs:extension base="Network">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="interface" type="Interface"/>
+                    <xs:element maxOccurs="1" minOccurs="0" name="subcircuit" type="SubCircuit"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="Population">
+        <xs:complexContent>
+            <xs:extension base="Standalone">
+                <xs:choice>
+                    <xs:element minOccurs="0" name="layout" type="Layout"/>
+                    <xs:element maxOccurs="unbounded" name="instance" type="Instance"/>
+                </xs:choice>
+                <xs:attribute name="cell" type="NmlId" use="optional"/>
+                <!-- Only one of these should be used!!! -->
+                <xs:attribute name="network" type="NmlId" use="optional"/>
+                <!-- Only one of these should be used!!! -->
+                <xs:attribute name="component" type="NmlId" use="optional"/>
+                <!-- Only one of these should be used!!! -->
+                <xs:attribute name="size" type="xs:integer" use="optional"/>
+                <!-- Temp!!! -->
+                <xs:attribute name="type" type="populationTypes" use="optional"/>
+                <xs:attribute name="extracellularProperties" type="NmlId" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="populationTypes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="population"/>
+            <xs:enumeration value="populationList"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="InputList">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="Base">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" name="input" type="Input"/>
+                </xs:sequence>
+                <xs:attribute name="population" type="NmlId"/>
+                <xs:attribute name="component" type="NmlId"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="Input">
+        <xs:annotation>
+            <xs:documentation>Subject to change as it gets tested with LEMS</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:nonNegativeInteger"/>
+        <xs:attribute name="target" type="xs:string"/>
+        <xs:attribute name="destination" type="NmlId"/>
+    </xs:complexType>
+
+</xs:schema>
