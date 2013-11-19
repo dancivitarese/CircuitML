@@ -24,6 +24,7 @@ This package contains the following:
   CircuitML constructs.
 - A libNeuroML backend for storing data specified using CircuitML to GPU-based
   data structures using PyCUDA [3].
+<<<<<<< HEAD
 
 Installation Instructions
 =========================
@@ -37,6 +38,14 @@ Installation Dependencies
 * `libNeuroML <https://github.com/NeuralEnsemble/libNeuroML>`_ 0.1.9 or later.
 * `PyCUDA <http://mathema.tician.de/software/pycuda>`_ 2011.1.2 or
   later.
+=======
+  
+License
+-------
+This software is licensed under the `BSD License
+<http://www.opensource.org/licenses/bsd-license.php>`_.
+See the included LICENSE file for more information.
+>>>>>>> 2345d31a05228ced955f22fde8009b65a1d3fdfb
 
 .. [1] http://neuroml.org/neuroml2.php
 .. [2] https://github.com/NeuralEnsemble/libNeuroML
