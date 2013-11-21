@@ -8,7 +8,7 @@
     elementFormDefault="qualified">
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <!--      Main CircuitML element                             -->
+    <!--      Main CircuitML element                           -->
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
     <xs:element name="circuitml" type="CircuitMLDocument">
