@@ -1,71 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xsd:schema xmlns:this="https://raw.github.com/dchevitarese/CircuitML/master/schemas/circuitml.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="https://raw.github.com/dchevitarese/CircuitML/master/schemas/circuitml.xsd" xmlns:nml="http://www.neuroml.org/schema/neuroml2">
+<xsd:schema
+	xmlns:this="https://raw.github.com/dchevitarese/CircuitML/master/schemas/circuitml.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="https://raw.github.com/dchevitarese/CircuitML/master/schemas/circuitml.xsd"
+	xmlns:nml="http://www.neuroml.org/schema/neuroml2">
 
 	<xsd:import namespace="http://www.neuroml.org/schema/neuroml2"
 		schemaLocation="https://raw.github.com/NeuroML/NeuroML2/master/Schemas/NeuroML2/NeuroML_v2beta1.xsd" />
 
+	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Main CircuitML element -->
+	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 	<xsd:element name="circuitml" type="nml:NeuroMLDocument">
 		<xsd:annotation>
 			<xsd:documentation>The root CircuitML element.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 
-	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<!-- Modules -->
-	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-
-	<xsd:complexType name="Lpu">
+	<xsd:complexType name="CircuitMLDocument">
 		<xsd:complexContent>
-			<xsd:extension base="nml:Network">
+			<xsd:extension base="nml:NeuroMLDocument">
 				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" name="interface"
-						type="this:Interface" />
-					<xsd:element maxOccurs="1" minOccurs="0" name="subcircuit"
-						type="this:SubCircuit" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="lpu"
+						type="this:Lpu" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="SubCircuit"></xsd:complexType>
-
-	<xsd:complexType name="IncludeType"></xsd:complexType>
-
-	<xsd:complexType name="Population">
-		<xsd:complexContent>
-			<xsd:extension base="nml:Standalone">
-				<xsd:choice>
-					<xsd:element minOccurs="0" name="layout" type="nml:Layout" />
-					<xsd:element maxOccurs="unbounded" name="interface"
-						type="this:Interface" />
-				</xsd:choice>
-				<xsd:attribute name="cell" type="nml:NmlId" use="optional" />
-				<!-- Only one of these should be used!!! -->
-				<xsd:attribute name="network" type="nml:NmlId" use="optional" />
-				<!-- Only one of these should be used!!! -->
-				<xsd:attribute name="component" type="nml:NmlId" use="optional" />
-				<!-- Only one of these should be used!!! -->
-				<xsd:attribute name="size" type="xsd:integer" use="optional" />
-				<!-- Temp!!! -->
-				<xsd:attribute name="type" type="nml:populationTypes"
-					use="optional" />
-				<xsd:attribute name="extracellularProperties" type="nml:NmlId"
-					use="optional" />
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:simpleType name="populationTypes">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="population" />
-			<xsd:enumeration value="populationList" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
 	<xsd:complexType name="InputList">
 		<xsd:annotation>
-			<xsd:documentation>Subject to change as it gets tested with LEMS
+			<xsd:documentation>
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
@@ -80,9 +45,57 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
+	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<!-- Modules -->
+	<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<xsd:complexType name="Lpu">
+		<xsd:complexContent>
+			<xsd:extension base="nml:Network">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" name="interface" type="this:Interface" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="subcircuit"
+						type="this:SubCircuit" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="SubCircuit">
+		<xsd:complexContent>
+			<xsd:extension base="nml:Network">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" name="interface" type="this:Interface" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Population">
+		<xsd:complexContent>
+			<xsd:extension base="nml:Standalone">
+				<xsd:choice>
+					<xsd:element minOccurs="0" name="layout" type="nml:Layout" />
+					<xsd:element maxOccurs="unbounded" name="interface" type="this:Interface" />
+				</xsd:choice>
+				<xsd:attribute name="cell" type="nml:NmlId" use="optional" />
+				<!-- Only one of these should be used!!! -->
+				<xsd:attribute name="network" type="nml:NmlId" use="optional" />
+				<!-- Only one of these should be used!!! -->
+				<xsd:attribute name="component" type="nml:NmlId" use="optional" />
+				<!-- Only one of these should be used!!! -->
+				<xsd:attribute name="size" type="xsd:integer" use="optional" />
+				<!-- Temp!!! -->
+				<xsd:attribute name="type" type="nml:populationTypes" use="optional" />
+				<xsd:attribute name="extracellularProperties" type="nml:NmlId"
+					use="optional" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
 	<xsd:complexType name="Input">
 		<xsd:annotation>
-			<xsd:documentation>Subject to change as it gets tested with LEMS
+			<xsd:documentation>
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:attribute name="id" type="xsd:nonNegativeInteger" />
@@ -97,21 +110,11 @@
 		</xsd:annotation>
 		<xsd:complexContent>
 			<xsd:extension base="nml:Standalone">
-				<xsd:attribute name="inputs" type="xsd:integer" use="optional" />
-				<xsd:attribute name="outputs" type="xsd:integer" use="optional" />
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="CircuitMLDocument">
-		<xsd:complexContent>
-			<xsd:extension base="nml:NeuroMLDocument">
 				<xsd:sequence>
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="include"
-						type="this:IncludeType" />
-					<xsd:element maxOccurs="unbounded" minOccurs="0" name="lpu"
-						type="this:Lpu" />
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="io"
+						type="xsd:string" />
 				</xsd:sequence>
+				<xsd:attribute name="exposeAll" type="xsd:boolean" use="optional" />
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
