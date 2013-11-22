@@ -1,5 +1,4 @@
-<LpuSpecification xmlns="http://www.neuroml.org/schema/neuroml2"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<circuitml xmlns="http://goo.gl/45Lt0l"
   xsi:schemaLocation="cml_v1.xsd" id="Antenna_Lobe">
 
   <lpuInputIaF id="LpuInputIaF" />
