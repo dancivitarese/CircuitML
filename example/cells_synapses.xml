@@ -1,0 +1,67 @@
+<LpuSpecification xmlns="http://www.neuroml.org/schema/neuroml2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="cml_v1.xsd" id="lpu_example">
+  <lpuInputIaF id="LpuInputIaF" />
+  <lpuOutputIaF id="LpuOutputIaF" />
+  <lpuInputMorrisLecar id="LpuInputMorrisLecar" />
+  <lpuOutputMorrisLecar id="LpuOutputMorrisLecar" />
+
+  <expOneSynapse id="syn_iaf_in" erev="0mV" gbase="65nS"
+    tauDecay="3ms" />
+  <expOneSynapse id="syn_iaf_out" erev="0mV" gbase="65nS"
+    tauDecay="3ms" />
+  <expOneSynapse id="syn_iaf" erev="0mV" gbase="45nS"
+    tauDecay="3ms" />
+  <morrisLecarSynapse id="syn_ml_in" slope="0.32"
+    thresh="45" power="2.1" factor="0.02" erev="0.01" saturation=".25"
+    delay=".76" />
+  <morrisLecarSynapse id="syn_ml_out" slope="0.32"
+    thresh="45" power="2.1" factor="0.02" erev="0.01" saturation=".25"
+    delay=".76" />
+  <morrisLecarSynapse id="syn_ml" slope="0.32"
+    thresh="45" power="2.1" factor="0.02" erev="0.01" saturation=".25"
+    delay=".76" />
+
+  <iafCell id="iaf_cell_1" reset="-70mV" C="0.03nF" thresh="-25mV"
+    leakConductance="1uS" leakReversal="-50mV" />
+  <iafCell id="iaf_cell_2" reset="-50mV" C="0.13nF" thresh="-22mV"
+    leakConductance="2uS" leakReversal="-45mV" />
+  <morrisLecarCell id="ml_cell_1" C="20uF" I="65mV" gL="2mS"
+    gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV"
+    V3="10mV" V4="10mV" phi="0.1" />
+  <morrisLecarCell id="ml_cell_2" C="20uF" I="65mV" gL="2mS"
+    gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV"
+    V3="10mV" V4="10mV" phi="0.1" />
+
+  <network id="net_example">
+    <population id="LpuInputIaF" component="LpuInputIaF"
+      size="2" />
+    <population id="LpuOutputIaF" component="LpuOutputIaF"
+      size="2" />
+    <population id="LpuInputMorrisLecar" component="LpuInputMorrisLecar"
+      size="2" />
+    <population id="LpuOutputMorrisLecar" component="LpuOutputMorrisLecar"
+      size="2" />
+    <population id="iaf_pop_1" component="iaf_cell_1" size="5" />
+    <population id="iaf_pop_2" component="iaf_cell_2" size="7" />
+    <population id="ml_pop_1" component="ml_cell_1" size="6" />
+    <population id="ml_pop_2" component="ml_cell_2" size="8" />
+
+    <projection id="proj_in_iaf" presynapticPopulation="LpuInputIaF"
+      postsynapticPopulation="iaf_pop_1" synapse="syn_iaf_in" />
+    <projection id="proj_out_iaf" presynapticPopulation="iaf_pop_2"
+      postsynapticPopulation="LpuOutputIaF" synapse="syn_iaf_out" />
+    <projection id="proj_local_iaf" presynapticPopulation="iaf_pop_1"
+      postsynapticPopulation="iaf_pop_2" synapse="syn_iaf">
+      <connection preCellId="iaf_pop_1[0]" postCellId="iaf_pop_2[0]" />
+      <connection preCellId="iaf_pop_1[0]" postCellId="iaf_pop_2[1]" />
+    </projection>
+
+    <projection id="proj_in_ml" presynapticPopulation="LpuInputMorrisLecar"
+      postsynapticPopulation="ml_pop_1" synapse="syn_ml_in" />
+    <projection id="proj_out_ml" presynapticPopulation="ml_pop_2"
+      postsynapticPopulation="LpuOutputMorrisLecar" synapse="syn_ml_out" />
+    <projection id="proj_ml" presynapticPopulation="ml_pop_1"
+      postsynapticPopulation="ml_pop_2" synapse="syn_ml" />
+  </network>
+</LpuSpecification>
