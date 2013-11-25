@@ -3,7 +3,8 @@
   and a projection ("Proj1") between two populations. Author: Daniel Salles 
   Chevitarese -->
 
-<circuitml xmlns="http://www.neuroml.org/schema/neuroml2"
+<circuitml xmlns="http://www.circuitml.org/schema"
+  xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Antenna_Lobe">
 
   <!-- Instances of some of the connections types currently supported in 
@@ -23,8 +24,8 @@
   <morrisLecarCell id="ml_cell_1" C="20uF" I=".065A" gL="2mS"
     gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV"
     V3="10mV" V4="10mV" phi="0.1" />
-
-  <network id="SimpleLpu">
+  
+  <lpu id="SimpleLpu">
     <!-- Interface with 5 ports to neurons iaf_block/0, iaf_block/5, iaf_block/7, 
       ml_block/1 and ml_block/3. By doing this, only those neurons would be visible 
       to other LPUs. You can also use attribute "exposeAll" to expose all neurons. -->
@@ -58,5 +59,5 @@
     <projection id="Population1" presynapticPopulation="Population1"
       postsynapticPopulation="Population2" synapse="Syn1">
     </projection>
-  </network>
+  </lpu>
 </circuitml>

@@ -1,7 +1,8 @@
 <!-- CircuitML example of usage: example on how to instantiate basic components, 
   such as cells and synapses. Author: Daniel Salles Chevitarese -->
 
-<circuitml xmlns="http://www.neuroml.org/schema/neuroml2"
+<circuitml xmlns="http://www.circuitml.org/schema"
+  xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Antenna_Lobe">
 
   <!-- Instances of some of the connections types currently supported in 
