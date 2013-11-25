@@ -1,14 +1,24 @@
-<circuitml xmlns="http://www.neuroml.org/schema/neuroml2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  id="Antenna_Lobe">
-  <expOneSynapse id="syn_iaf" erev="0mV" gbase="65nS" tauDecay="3ms" />
+<!-- CircuitML example of usage: example on how to instantiate basic components, 
+  such as cells and synapses. Author: Daniel Salles Chevitarese -->
 
-  <morrisLecarSynapse id="syn_ml" slope="0.32" thresh="45"
-    gbase="0nS" power="2.1" factor="0.02" erev="0.01mV" saturation=".25" delay=".76ms" />
+<circuitml xmlns="http://www.neuroml.org/schema/neuroml2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Antenna_Lobe">
 
+  <!-- Instances of some of the connections types currently supported in 
+    CircuitML. -->
+  <expOneSynapse id="syn_iaf" erev="0mV" gbase="65nS"
+    tauDecay="3ms" />
+
+  <morrisLecarSynapse id="syn_ml" slope="0.32"
+    thresh="45" gbase="0nS" power="2.1" factor="0.02" erev="0.01mV"
+    saturation=".25" delay=".76ms" />
+
+  <!-- Instances of some of the connections types currently supported in 
+    CircuitML. -->
   <iafCell id="iaf_cell_1" reset="-70mV" C="0.03nF" thresh="-25mV"
     leakConductance="1uS" leakReversal="-50mV" />
 
   <morrisLecarCell id="ml_cell_1" C="20uF" I=".065A" gL="2mS"
-    gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV" V3="10mV"
-    V4="10mV" phi="0.1" />
+    gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV"
+    V3="10mV" V4="10mV" phi="0.1" />
 </circuitml>
