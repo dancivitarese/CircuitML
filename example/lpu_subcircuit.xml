@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- CircuitML example of usage: example on how to create a simple LPU, with 
+  one interface and a subcircuit. Author: Daniel Salles Chevitarese -->
+<!-- Keywords: circuitml, lpu, interface, population, projection, connection, 
+  subcircuit, path -->
+
+<cml:circuitml id="" xmlns:cml="http://www.circuitml.org/schema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd ">
+
+  <cml:expOneSynapse id="syn_iaf" erev="0mV" gbase="65nS"
+    tauDecay="3ms" />
+
+  <cml:iafCell id="iaf_cell_1" reset="-70mV" C="0.03nF"
+    thresh="-25mV" leakConductance="1uS" leakReversal="-50mV" />
+  <cml:iafCell id="iaf_cell_2" reset="-50mV" C="0.025nF"
+    thresh="-32mV" leakConductance="1.5uS" leakReversal="-48mV" />
+
+  <cml:subcircuit id="SBstructure">
+    <cml:interface id="SBio1" exposeAll="true" />
+
+    <cml:population id="SBpop1" size="10" cell="iaf_cell_1" />
+    <cml:population id="SBpop2" size="10" cell="iaf_cell_2" />
+
+    <cml:projection id="proj12" presynapticPopulation="SBpop1"
+      postsynapticPopulation="SBpop2" />
+    <cml:projection id="proj21" presynapticPopulation="SBpop2"
+      postsynapticPopulation="SBpop1" />
+  </cml:subcircuit>
+
+  <cml:lpu id="SimpleLpu">
+    <cml:interface id="interface01" exposeAll="true" />
+
+    <!-- Left hemisphere circuit consisting of 40 structures -->
+    <cml:population id="leftCircuit" subcircuit="SBstructure"
+      size="40" />
+    <!-- Right hemisphere circuit consisting of 40 structures -->
+    <cml:population id="rightCircuit" subcircuit="SBstructure"
+      size="40" />
+
+    <!-- Connectivity between the two hemispheres: projLR comprises all connections 
+      from left hemisphere to the right one; projRL comprises all connection from 
+      the right hemisphere to the left one. -->
+    <cml:projection id="projLR" presynapticPopulation="leftCircuit"
+      postsynapticPopulation="rightCircuit" synapse="Syn1">
+      <!-- This example shows how to use path to reference cells inside populations -->
+      <cml:connection preCellId="SBpop1/0" postCellId="SBpop1/0" />
+      <cml:connection preCellId="SBpop1/1" postCellId="SBpop1/1" />
+      <cml:connection preCellId="SBpop1/2" postCellId="SBpop1/2" />
+      <cml:connection preCellId="SBpop1/3" postCellId="SBpop1/3" />
+      <cml:connection preCellId="SBpop1/4" postCellId="SBpop1/4" />
+      <cml:connection preCellId="SBpop2/0" postCellId="SBpop2/0" />
+      <cml:connection preCellId="SBpop2/1" postCellId="SBpop2/1" />
+      <cml:connection preCellId="SBpop2/2" postCellId="SBpop2/2" />
+      <cml:connection preCellId="SBpop2/3" postCellId="SBpop2/3" />
+      <cml:connection preCellId="SBpop2/4" postCellId="SBpop2/4" />
+    </cml:projection>
+
+    <cml:projection id="projRL" presynapticPopulation="rightCircuit"
+      postsynapticPopulation="leftCircuit" synapse="Syn1">
+      <cml:connection preCellId="SBpop1/0" postCellId="SBpop1/0" />
+      <cml:connection preCellId="SBpop1/1" postCellId="SBpop1/1" />
+      <cml:connection preCellId="SBpop1/2" postCellId="SBpop1/2" />
+      <cml:connection preCellId="SBpop1/3" postCellId="SBpop1/3" />
+      <cml:connection preCellId="SBpop1/4" postCellId="SBpop1/4" />
+      <cml:connection preCellId="SBpop2/0" postCellId="SBpop2/0" />
+      <cml:connection preCellId="SBpop2/1" postCellId="SBpop2/1" />
+      <cml:connection preCellId="SBpop2/2" postCellId="SBpop2/2" />
+      <cml:connection preCellId="SBpop2/3" postCellId="SBpop2/3" />
+      <cml:connection preCellId="SBpop2/4" postCellId="SBpop2/4" />
+    </cml:projection>
+  </cml:lpu>
+</cml:circuitml>
