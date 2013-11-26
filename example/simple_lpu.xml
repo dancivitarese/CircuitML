@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- CircuitML example of usage: example on how to create a simple LPU ("SimpleLpu"), 
   with one interface ("interface01"), two populations ("Population1" and "Population2") 
   and a projection ("Proj1") between two populations. Author: Daniel Salles 
   Chevitarese -->
+<!-- Keywords: circuitml, lpu, interface, population, projection, space -->
 
 <circuitml xmlns="http://www.circuitml.org/schema"
   xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd"
@@ -24,12 +27,12 @@
   <morrisLecarCell id="ml_cell_1" C="20uF" I=".065A" gL="2mS"
     gCa="4mS" gK="8mS" VL="-50mV" VCa="100mV" VK="-70mV" V1="0mV" V2="15mV"
     V3="10mV" V4="10mV" phi="0.1" />
-  
+
   <lpu id="SimpleLpu">
     <!-- Interface with 5 ports to neurons iaf_block/0, iaf_block/5, iaf_block/7, 
       ml_block/1 and ml_block/3. By doing this, only those neurons would be visible 
       to other LPUs. You can also use attribute "exposeAll" to expose all neurons. -->
-    <!-- <interface id="interface01" exposeAll="Yes" /> -->
+    <!-- <interface id="interface01" exposeAll="true" /> -->
     <interface id="interface01">
       <io>iaf_block/0</io>
       <io>iaf_block/5</io>
@@ -60,4 +63,5 @@
       postsynapticPopulation="Population2" synapse="Syn1">
     </projection>
   </lpu>
+
 </circuitml>

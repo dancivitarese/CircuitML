@@ -1,5 +1,6 @@
 <!-- CircuitML example of usage: example on how to instantiate basic components, 
   such as cells and synapses. Author: Daniel Salles Chevitarese -->
+<!-- Keywords: circuitml, cell, synapse, morris lecar, iaf -->
 
 <circuitml xmlns="http://www.circuitml.org/schema"
   xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd"
