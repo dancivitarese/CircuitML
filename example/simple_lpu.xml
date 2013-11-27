@@ -34,25 +34,25 @@
       to other LPUs. You can also use attribute "exposeAll" to expose all neurons. -->
     <!-- <interface id="interface01" exposeAll="true" /> -->
     <interface id="interface01">
-      <io>iaf_block/0</io>
-      <io>iaf_block/5</io>
-      <io>iaf_block/7</io>
-      <io>ml_block/1</io>
-      <io>ml_block/3</io>
+      <io>Population1/0</io>
+      <io>Population1/5</io>
+      <io>Population1/7</io>
+      <io>Population2/1</io>
+      <io>Population2/3</io>
     </interface>
 
     <!-- Cells are placed on a grid in 2D. -->
     <space id="Grid1" basedOn="Grid_2D" />
 
     <!-- Population consisting of 10x20 grid of cells -->
-    <population id="Population1" cell="Cell1">
+    <population id="Population1" cell="iaf_cell_1">
       <layout space="Grid1">
         <grid xSize="10" ySize="20" />
       </layout>
     </population>
 
     <!-- Population consisting of 40 cells -->
-    <population id="Population2" cell="Cell2" size="40" />
+    <population id="Population2" cell="ml_cell_1" size="40" />
 
     <!-- Connections between these populations. Since no explicit connection 
       was defined, it will assume that all neurons are connected. It is also possible 
