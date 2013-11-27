@@ -3,7 +3,7 @@
 <!-- Keywords: circuitml, cell, synapse, morris lecar, iaf -->
 
 <circuitml xmlns="http://www.circuitml.org/schema"
-  xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd"
+  xsi:schemaLocation="http://www.circuitml.org/schema https://raw.github.com/dchevitarese/CircuitML/master/schemas/CircuitML_alpha1.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Antenna_Lobe">
 
   <!-- Instances of some of the connections types currently supported in 

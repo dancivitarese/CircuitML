@@ -7,7 +7,7 @@
 
 <cml:circuitml id="" xmlns:cml="http://www.circuitml.org/schema"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.circuitml.org/schema ../schemas/CircuitML_alpha1.xsd ">
+  xsi:schemaLocation="http://www.circuitml.org/schema https://raw.github.com/dchevitarese/CircuitML/master/schemas/CircuitML_alpha1.xsd">
 
   <cml:expOneSynapse id="syn_iaf" erev="0mV" gbase="65nS"
     tauDecay="3ms" />
