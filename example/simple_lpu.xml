@@ -58,11 +58,11 @@
       was defined, it will assume that all neurons are connected. It is also possible 
       to define specific connectivity patterns by including "connection" elements 
       inside "projection" -->
-    <projection id="Population1" presynapticPopulation="Population1"
+    <projection id="proj1" presynapticPopulation="Population1"
       postsynapticPopulation="Population2" synapse="syn_ml">
     </projection>
 
-    <projection id="Population1" presynapticPopulation="Population1"
+    <projection id="proj2" presynapticPopulation="Population1"
       postsynapticPopulation="Population2" synapse="syn_iaf">
       <connection preCellId="0" postCellId="1" />
       <connection preCellId="0" postCellId="2" />
