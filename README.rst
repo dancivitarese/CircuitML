@@ -3,8 +3,8 @@
 CircuitML
 =========
 
-Package Description
--------------------
+Package Descriptions
+--------------------
 CircuitML is an extension to NeuroML 2.0 that enables one to define reusable
 heterogeneous circuit motifs and connectivity patterns and use them to construct complex 
 networks.
